@@ -21,8 +21,8 @@ module.exports = {
   rules: {
     'linebreak-style': ['error', 'unix'],
     // disable rules below
-    indent: 0,
     quotes: 0,
+    indent: 0,
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/no-var-requires': 0, // allow require
     '@typescript-eslint/no-explicit-any': 0,
@@ -31,4 +31,3 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': ['error'],
   },
 };
-
