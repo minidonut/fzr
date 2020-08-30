@@ -1,4 +1,4 @@
-import { box } from '../printer/box';
+import { box } from './box';
 
 export const onCancel = (action: string) => (): void => {
   console.log(box(`${action} canceled. 🤔`));

@@ -1,5 +1,5 @@
 import * as chalk from 'chalk';
-import { box } from '../printer/box';
+import { box } from '../utils/box';
 
 export class BaseError extends Error {}
 
