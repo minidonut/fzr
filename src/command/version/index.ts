@@ -1,5 +1,5 @@
-import { version } from '../../package.json';
-import { box } from '../printer/box';
+import { version } from '../../../package.json';
+import { box } from '../../printer/box';
 import * as chalk from 'chalk';
 async function command(): Promise<void> {
   const updateAvailable = false;
