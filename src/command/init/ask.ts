@@ -3,8 +3,9 @@ import * as os from 'os';
 import * as chalk from 'chalk';
 import { onCancel } from '../../utils/prompt';
 import * as prompts from 'prompts';
+import { DatabaseType } from '../../model';
 
-const database = async (): Promise<string> => {
+const database = async (): Promise<DatabaseType> => {
   // prettier-ignore
   const { database } = await prompts({
     name: 'database',
@@ -24,7 +25,7 @@ const database = async (): Promise<string> => {
     initial: 1,
   }, { onCancel: onCancel('init') });
 
-  return database;
+  return database as DatabaseType;
 };
 
 const basepath = async (): Promise<string> => {

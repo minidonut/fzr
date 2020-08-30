@@ -1,6 +1,8 @@
 import * as execa from 'execa';
 import { PecoNotFoundError } from '../../error';
 import { ask } from './ask';
+import { setup } from './setup';
+import { context } from '../../context';
 
 async function command(): Promise<void> {
   try {
@@ -12,9 +14,11 @@ async function command(): Promise<void> {
   }
 
   const database = await ask.database();
-  const basepath = await ask.basepath();
+  context.basepath = await ask.basepath();
 
-  console.log({ database, basepath });
+  await setup({
+    database,
+  });
 }
 
 export default command;
