@@ -22,7 +22,7 @@ const fzr = async (): Promise<void> => {
      *  configuration
      */
     case 'init':
-      throw new NotImplementedCommandError(cmd);
+      require('./command/init').default();
       break;
     case 'status':
       throw new NotImplementedCommandError(cmd);
