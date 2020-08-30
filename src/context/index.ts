@@ -1,3 +1,3 @@
-export const env = {
+export const context = {
   cmd: process.argv[2],
 };

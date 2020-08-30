@@ -1,8 +1,8 @@
-import { env } from './env';
+import { context } from './context';
 import * as command from './command';
 
 (async (): Promise<void> => {
-  switch (env.cmd) {
+  switch (context.cmd) {
     case 'version':
       break;
     case 'init':
@@ -26,8 +26,10 @@ import * as command from './command';
     case 'import':
       break;
     default:
-      if (env.cmd != null) {
-        command.notSupported(env.cmd);
+      if (context.cmd != null) {
+        command.notSupported(context.cmd);
+      } else {
+        command.open();
       }
       break;
   }
