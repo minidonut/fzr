@@ -1,5 +1,6 @@
 import { context } from './context';
 import * as command from './command';
+import { handleRejection, handleException, UnSupportedError } from './error';
 
 (async (): Promise<void> => {
   switch (context.cmd) {
@@ -27,10 +28,13 @@ import * as command from './command';
       break;
     default:
       if (context.cmd != null) {
-        command.notSupported(context.cmd);
+        throw new UnSupportedError(`Command '${context.cmd}' is not supported 😔`);
       } else {
         command.open();
       }
       break;
   }
 })();
+
+process.on('uncaughtException', handleException);
+process.on('unhandledRejection', handleRejection);
