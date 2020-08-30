@@ -1,7 +1,9 @@
 import * as chalk from 'chalk';
 import { box } from '../printer/box';
 
-export class UnSupportedCommandError extends Error {
+export class BaseError extends Error {}
+
+export class UnSupportedCommandError extends BaseError {
   command: string;
 
   constructor(command: string) {
@@ -20,7 +22,7 @@ ${chalk.blueBright('https://github.com/minidonut/fzr/issues')}`);
   }
 }
 
-export class NotImplementedCommandError extends Error {
+export class NotImplementedCommandError extends BaseError {
   command: string;
 
   constructor(command: string) {
@@ -35,5 +37,20 @@ export class NotImplementedCommandError extends Error {
 for more information, see
 
 ${chalk.blueBright('https://github.com/minidonut/fzr/issues')}`);
+  }
+}
+
+export class PecoNotFoundError extends BaseError {
+  command: string;
+
+  constructor() {
+    super();
+    this.name = this.constructor.name;
+  }
+
+  get message(): string {
+    return box(`Runtime dependency '${chalk.yellowBright('peco')}' is not found
+
+${chalk.blueBright('https://github.com/peco/peco#installation')}`);
   }
 }
