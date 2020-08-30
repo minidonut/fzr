@@ -1,4 +1,4 @@
-export async function handleRejection(e: Error): Promise<void> {
-  console.log(e);
-  process.exit(1);
+export function handleRejection(e: Error): Promise<void> {
+  // catch promise rejection to exception handler
+  throw e;
 }

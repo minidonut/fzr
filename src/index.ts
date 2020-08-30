@@ -2,7 +2,7 @@ import { context } from './context';
 import * as command from './command';
 import { handleRejection, handleException, UnSupportedError } from './error';
 
-(async (): Promise<void> => {
+const fzr = async (): Promise<void> => {
   switch (context.cmd) {
     case 'version':
       break;
@@ -34,7 +34,9 @@ import { handleRejection, handleException, UnSupportedError } from './error';
       }
       break;
   }
-})();
+};
 
 process.on('uncaughtException', handleException);
 process.on('unhandledRejection', handleRejection);
+
+fzr();
