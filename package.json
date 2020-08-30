@@ -31,9 +31,22 @@
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
+  "bin": {
+    "fzr": "dist/index.js"
+  },
   "dependencies": {
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
     "prompts": "^2.3.2"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "fuzzy",
+    "todo",
+    "cli",
+    "command-line"
+  ]
 }
