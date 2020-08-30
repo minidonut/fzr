@@ -41,8 +41,6 @@ ${chalk.blueBright('https://github.com/minidonut/fzr/issues')}`);
 }
 
 export class PecoNotFoundError extends BaseError {
-  command: string;
-
   constructor() {
     super();
     this.name = this.constructor.name;
