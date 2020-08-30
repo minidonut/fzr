@@ -54,3 +54,19 @@ export class PecoNotFoundError extends BaseError {
 ${chalk.blueBright('https://github.com/peco/peco#installation')}`);
   }
 }
+
+export class FileAlreadyExistError extends BaseError {
+  filepath: string;
+  filename: string;
+  constructor(filepath: string, filename: string) {
+    super();
+    this.filepath = filepath;
+    this.filename = filename;
+  }
+
+  get message(): string {
+    return box(`⚠ failed to create ${this.filename}
+
+'${chalk.blueBright(this.filepath)}' alreay exist`);
+  }
+}
