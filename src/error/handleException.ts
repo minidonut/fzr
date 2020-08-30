@@ -1,6 +1,6 @@
-import { UnSupportedError } from './Errors';
+import { UnSupportedCommandError } from './Errors';
 export async function handleException(e: Error): Promise<void> {
-  if (e instanceof UnSupportedError) {
+  if (e instanceof UnSupportedCommandError) {
     console.error(e.message);
   } else {
     // unhandled;

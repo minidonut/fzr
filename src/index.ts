@@ -1,6 +1,6 @@
 import { context } from './context';
 import * as command from './command';
-import { handleRejection, handleException, UnSupportedError } from './error';
+import { handleRejection, handleException, UnSupportedCommandError } from './error';
 
 const fzr = async (): Promise<void> => {
   switch (context.cmd) {
@@ -28,7 +28,7 @@ const fzr = async (): Promise<void> => {
       break;
     default:
       if (context.cmd != null) {
-        throw new UnSupportedError(`Command '${context.cmd}' is not supported 😔`);
+        throw new UnSupportedCommandError(context.cmd);
       } else {
         command.open();
       }
