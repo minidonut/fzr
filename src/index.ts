@@ -1,47 +1,66 @@
-import { context } from './context';
-import * as command from './command';
 import { handleRejection, handleException, UnSupportedCommandError, NotImplementedCommandError } from './error';
 
+const cmd = process.argv[2];
 const fzr = async (): Promise<void> => {
-  switch (context.cmd) {
+  switch (cmd) {
+    /**
+     *  helper command
+     */
     case 'version':
-      throw new NotImplementedCommandError(context.cmd);
+    case '--version':
+    case '-v': {
+      require('./command/version').default();
       break;
+    }
+    case 'help':
+    case '--help':
+    case '-h':
+      throw new NotImplementedCommandError('help');
+      break;
+
+    /**
+     *  configuration
+     */
     case 'init':
-      throw new NotImplementedCommandError(context.cmd);
+      throw new NotImplementedCommandError(cmd);
       break;
     case 'status':
-      throw new NotImplementedCommandError(context.cmd);
-      break;
-    case 'help':
-      throw new NotImplementedCommandError(context.cmd);
+      throw new NotImplementedCommandError(cmd);
       break;
     case 'config':
-      throw new NotImplementedCommandError(context.cmd);
+      throw new NotImplementedCommandError(cmd);
       break;
-    case 'add':
-      throw new NotImplementedCommandError(context.cmd);
-      break;
-    case 'rm':
-      throw new NotImplementedCommandError(context.cmd);
-      break;
-    case 'update':
-      throw new NotImplementedCommandError(context.cmd);
-      break;
-    case 'refresh':
-      throw new NotImplementedCommandError(context.cmd);
-      break;
+
+    /**
+     * backup and restore
+     */
     case 'export':
-      throw new NotImplementedCommandError(context.cmd);
+      throw new NotImplementedCommandError(cmd);
       break;
     case 'import':
-      throw new NotImplementedCommandError(context.cmd);
+      throw new NotImplementedCommandError(cmd);
+      break;
+
+    /**
+     * main functionality
+     */
+    case 'add':
+      throw new NotImplementedCommandError(cmd);
+      break;
+    case 'rm':
+      throw new NotImplementedCommandError(cmd);
+      break;
+    case 'update':
+      throw new NotImplementedCommandError(cmd);
+      break;
+    case 'refresh':
+      throw new NotImplementedCommandError(cmd);
       break;
     default:
-      if (context.cmd != null) {
-        throw new UnSupportedCommandError(context.cmd);
+      if (cmd != null) {
+        throw new UnSupportedCommandError(cmd);
       } else {
-        command.open();
+        require('./command/open').default();
       }
       break;
   }
