@@ -1,7 +1,7 @@
 {
   "name": "fzr",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Resource, Bookmark, Snippet manager cli using fuzzy search",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": "minidonut/[{project-name}}",
@@ -41,7 +41,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "package.json"
   ],
   "keywords": [
     "fuzzy",
