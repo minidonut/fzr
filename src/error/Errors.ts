@@ -1,4 +1,5 @@
 import * as chalk from 'chalk';
+import * as os from 'os';
 import { box } from '../utils/box';
 
 export class BaseError extends Error {}
@@ -66,5 +67,19 @@ export class FileAlreadyExistError extends BaseError {
     return box(`⚠ failed to create ${this.filename}
 
 '${chalk.blueBright(this.filepath)}' alreay exist`);
+  }
+}
+
+export class NotInitializedError extends BaseError {
+  constructor() {
+    super();
+  }
+
+  get message(): string {
+    return box(`Hi  ${chalk.yellowBright(os.hostname())} 😎
+
+We need to intialize app before start
+
+run ${chalk.greenBright('fzr init')}`);
   }
 }
