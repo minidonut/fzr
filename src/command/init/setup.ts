@@ -23,13 +23,13 @@ export async function setup({ database }: SetupProps): Promise<void> {
 }
 
 async function setupDatabase(database: DatabaseType): Promise<void> {
-  const { basepath, profile } = context;
-  const profilePath = path.join(basepath, profile);
+  const { basePath, profile } = context;
+  const profilePath = path.join(basePath, profile);
   if (database === 'json') {
     fs.writeFileSync(path.join(profilePath, 'database.json'), '{}');
   }
 
-  const configPath = path.join(basepath, 'config.json');
+  const configPath = path.join(basePath, 'config.json');
   const config = { [profile]: { database } };
   const oldConfig = fs.existsSync(configPath)
     ? JSON.parse(fs.readFileSync(configPath, 'utf-8'))
@@ -44,10 +44,10 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
 }
 
 async function setupProfile(): Promise<void> {
-  const { basepath, profile } = context;
+  const { basePath, profile } = context;
 
   // todo make it setter
-  const profilePath = path.join(basepath, profile);
+  const profilePath = path.join(basePath, profile);
   if (fs.existsSync(profilePath)) {
     throw new FileAlreadyExistError(profilePath, 'profile directory');
   }
@@ -56,8 +56,8 @@ async function setupProfile(): Promise<void> {
 }
 
 async function setupBasepath(): Promise<void> {
-  const { basepath } = context;
+  const { basePath } = context;
   // create base directory
-  await fs.ensureDir(basepath);
+  await fs.ensureDir(basePath);
   return;
 }

@@ -14,7 +14,7 @@ async function command(): Promise<void> {
   }
 
   const database = await ask.database();
-  context.basepath = await ask.basepath();
+  context.basePath = await ask.basepath();
   context.profile = await ask.profile();
 
   console.log(context);
