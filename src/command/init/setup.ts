@@ -1,4 +1,4 @@
-import { context } from '../../context';
+import { context } from '../../context/env';
 import { DatabaseType } from '../../model';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -31,7 +31,9 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
 
   const configPath = path.join(basepath, 'config.json');
   const config = { [profile]: { database } };
-  const oldConfig = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf-8')) : {};
+  const oldConfig = fs.existsSync(configPath)
+    ? JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+    : {};
 
   // prettier-ignore
   fs.writeFileSync(

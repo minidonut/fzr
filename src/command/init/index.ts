@@ -2,7 +2,7 @@ import * as execa from 'execa';
 import { PecoNotFoundError } from '../../error';
 import { ask } from './ask';
 import { setup } from './setup';
-import { context } from '../../context';
+import { context } from '../../context/env';
 
 async function command(): Promise<void> {
   try {
