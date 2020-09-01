@@ -1,4 +1,4 @@
-import { version } from '../../../package.json';
+const { version } = require('../../package.json');
 import { box } from '../../utils/box';
 import * as chalk from 'chalk';
 async function command(): Promise<void> {
