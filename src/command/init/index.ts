@@ -2,7 +2,7 @@ import * as execa from 'execa';
 import { PecoNotFoundError } from '../../error';
 import { ask } from './ask';
 import { setup } from './setup';
-import { context } from '../../context/env';
+import { env } from '../../context/env';
 
 async function command(): Promise<void> {
   try {
@@ -14,10 +14,10 @@ async function command(): Promise<void> {
   }
 
   const database = await ask.database();
-  context.basePath = await ask.basepath();
-  context.profile = await ask.profile();
+  env.basePath = await ask.basepath();
+  env.profile = await ask.profile();
 
-  console.log(context);
+  console.log(env);
   await setup({
     database,
   });

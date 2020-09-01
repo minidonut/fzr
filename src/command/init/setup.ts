@@ -1,4 +1,4 @@
-import { context } from '../../context/env';
+import { env } from '../../context/env';
 import { DatabaseType } from '../../model';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -23,7 +23,7 @@ export async function setup({ database }: SetupProps): Promise<void> {
 }
 
 async function setupDatabase(database: DatabaseType): Promise<void> {
-  const { basePath, profile } = context;
+  const { basePath, profile } = env;
   const profilePath = path.join(basePath, profile);
   if (database === 'json') {
     fs.writeFileSync(path.join(profilePath, 'database.json'), '{}');
@@ -44,7 +44,7 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
 }
 
 async function setupProfile(): Promise<void> {
-  const { basePath, profile } = context;
+  const { basePath, profile } = env;
 
   // todo make it setter
   const profilePath = path.join(basePath, profile);
@@ -56,7 +56,7 @@ async function setupProfile(): Promise<void> {
 }
 
 async function setupBasepath(): Promise<void> {
-  const { basePath } = context;
+  const { basePath } = env;
   // create base directory
   await fs.ensureDir(basePath);
   return;

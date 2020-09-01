@@ -1,23 +1,23 @@
 import * as os from 'os';
 import * as path from 'path';
 
-interface Context {
+interface Env {
   basePath: string;
   profile: string;
   configPath?: string;
 }
 
-const context: Context = {
+const env: Env = {
   basePath: process.env.FZR_PATH ?? path.join(os.homedir(), '.fzr'),
   profile: process.env.FZR_PROFILE ?? 'default',
   configPath: undefined,
 };
 
-context.configPath = context.basePath;
+env.configPath = env.basePath;
 
 // freeze basepath
 if (process.argv[2] !== 'init') {
-  Object.freeze(context);
+  Object.freeze(env);
 }
 
-export { context };
+export { env };
