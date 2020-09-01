@@ -4,16 +4,18 @@ import * as path from 'path';
 interface Env {
   basePath: string;
   profile: string;
-  configPath?: string;
+  configPath: string;
 }
 
-const env: Env = {
-  basePath: process.env.FZR_PATH ?? path.join(os.homedir(), '.fzr'),
-  profile: process.env.FZR_PROFILE ?? 'default',
-  configPath: undefined,
-};
+const basePath = process.env.FZR_PATH ?? path.join(os.homedir(), '.fzr');
+const profile = process.env.FZR_PROFILE ?? 'default';
+const configPath = path.join(basePath, 'config.json');
 
-env.configPath = env.basePath;
+const env: Env = {
+  basePath,
+  profile,
+  configPath,
+};
 
 // freeze basepath
 if (process.argv[2] !== 'init') {
