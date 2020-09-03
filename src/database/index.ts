@@ -4,6 +4,7 @@ import { ProfileNotFoundError } from '../error';
 import { Database, Item } from '../model';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as crypto from 'crypto';
 
 export const getDatabase = async (): Promise<Database | null> => {
   const databaseType = config[env.profile]?.database;
@@ -22,6 +23,10 @@ const recordLength = {
   title: 30,
   body: 80,
   key: 8,
+};
+
+const generateKey = (): string => {
+  return crypto.randomBytes(20).toString('hex').slice(0, 8);
 };
 
 const JsonDatabase = async (): Promise<Database> => {
@@ -45,7 +50,14 @@ const JsonDatabase = async (): Promise<Database> => {
     return;
   }
 
-  async function add(key: string, item: Item): Promise<Item> {
+  async function add(item: Item): Promise<Item> {
+    let key = generateKey();
+
+    // ensure no duplicate
+    while (key in json) {
+      key = generateKey();
+    }
+
     json[key] = item;
     await Promise.all([save(), generate()]);
     return item;
