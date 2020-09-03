@@ -76,7 +76,7 @@ export class NotInitializedError extends BaseError {
   }
 
   get message(): string {
-    return box(`Hi  ${chalk.yellowBright(os.hostname())} 😎
+    return box(`Hi  ${chalk.yellowBright(os.userInfo().username)} 😎
 
 We need to intialize app before start
 
