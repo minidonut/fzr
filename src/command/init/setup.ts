@@ -26,11 +26,13 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
   const { basePath, profile } = env;
   const profilePath = path.join(basePath, profile);
 
+  // TODO - make 'database.json' constant
   // handle database case
   if (database === 'json') {
     fs.writeFileSync(path.join(profilePath, 'database.json'), '{}');
   }
 
+  // TODO - make 'index', 'config.json' constant
   // generate index
   fs.writeFileSync(path.join(profilePath, 'index'), '');
 
@@ -51,7 +53,6 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
 async function setupProfile(): Promise<void> {
   const { basePath, profile } = env;
 
-  // todo make it setter
   const profilePath = path.join(basePath, profile);
   if (fs.existsSync(profilePath)) {
     throw new FileAlreadyExistError(profilePath, 'profile directory');
