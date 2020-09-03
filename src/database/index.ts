@@ -17,25 +17,57 @@ export const getDatabase = async (): Promise<Database | null> => {
   }
 };
 
+// TODO move to constnat
+const recordLength = {
+  title: 30,
+  body: 80,
+  key: 8,
+};
+
 const JsonDatabase = async (): Promise<Database> => {
-  const json: Record<string, Item> = await fs.readJson(path.join(env.profilePath, 'database.json'));
+  const jsonPath = path.join(env.profilePath, 'database.json');
+  const json: Record<string, Item> = await fs.readJson(jsonPath);
+
+  async function save(): Promise<void> {
+    await fs.writeJson(jsonPath, json);
+  }
+
+  async function generate(): Promise<void> {
+    const items = Object.entries(json);
+    const records: string[] = [];
+    for (const [key, item] of items) {
+      const title = item.title.padEnd(recordLength.title, ' ').slice(0, recordLength.title);
+      const body = item.title.padEnd(recordLength.body, ' ').slice(0, recordLength.body);
+
+      records.push(`${title} ${body} ${key}`);
+    }
+    await fs.outputFile(path.join(env.profilePath, 'index'), records.join('\n'));
+    return;
+  }
 
   async function add(key: string, item: Item): Promise<Item> {
     json[key] = item;
+    await Promise.all([save(), generate()]);
     return item;
   }
 
   async function get(key: string): Promise<Item> {
-    return Promise.resolve(json[key]);
+    const item = json[key];
+    item.accessedCount++;
+    item.accessedAt = Number(new Date());
+    await save();
+    return Promise.resolve(item);
   }
 
   async function update(key: string, item: Item): Promise<Item> {
     json[key] = item;
+    await Promise.all([save(), generate()]);
     return item;
   }
 
   async function remove(key: string): Promise<void> {
     delete json[key];
+    await Promise.all([save(), generate()]);
     return;
   }
 
