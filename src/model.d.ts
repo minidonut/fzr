@@ -13,9 +13,9 @@ export interface Item {
   accessedCount: number;
 }
 export interface Database {
-  create: (key: string, item: Item) => Promise<Item>;
-  read: (key: string) => Promise<Item>;
+  add: (key: string, item: Item) => Promise<Item>;
+  get: (key: string) => Promise<Item>;
   update: (key: string, item: Item) => Promise<Item>;
-  delete: (key: string) => Promise<void>;
+  remove: (key: string) => Promise<void>;
   length: () => Promise<number>;
 }

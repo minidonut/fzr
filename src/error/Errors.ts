@@ -97,3 +97,15 @@ export class IndexNotFoundError extends BaseError {
 '${chalk.blueBright(this.filepath)}'`);
   }
 }
+
+export class ProfileNotFoundError extends BaseError {
+  profile: string;
+  constructor(profile: string) {
+    super();
+    this.profile = profile;
+  }
+
+  get message(): string {
+    return box(`😔 failed to load profile '${chalk.greenBright(this.profile)}'`);
+  }
+}
