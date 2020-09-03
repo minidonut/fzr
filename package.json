@@ -1,6 +1,6 @@
 {
   "name": "fzr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Resource, Bookmark, Snippet manager cli using fuzzy search",
   "license": "MIT",
   "main": "dist/index.js",
