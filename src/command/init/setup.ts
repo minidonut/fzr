@@ -23,8 +23,7 @@ export async function setup({ database }: SetupProps): Promise<void> {
 }
 
 async function setupDatabase(database: DatabaseType): Promise<void> {
-  const { basePath, profile } = env;
-  const profilePath = path.join(basePath, profile);
+  const { basePath, profile, profilePath } = env;
 
   // TODO - make 'database.json' constant
   // handle database case
