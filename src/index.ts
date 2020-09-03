@@ -1,4 +1,9 @@
-import { handleRejection, handleException, UnSupportedCommandError, NotImplementedCommandError } from './error';
+import {
+  handleRejection,
+  handleException,
+  UnSupportedCommandError,
+  NotImplementedCommandError,
+} from './error';
 
 const cmd = process.argv[2];
 const fzr = async (): Promise<void> => {
@@ -45,7 +50,7 @@ const fzr = async (): Promise<void> => {
      * main functionality
      */
     case 'add':
-      throw new NotImplementedCommandError(cmd);
+      require('./command/add').default();
       break;
     case 'rm':
       throw new NotImplementedCommandError(cmd);

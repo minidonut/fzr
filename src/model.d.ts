@@ -13,7 +13,7 @@ export interface Item {
   accessedCount: number;
 }
 export interface Database {
-  add: (key: string, item: Item) => Promise<Item>;
+  add: (item: Item) => Promise<Item>;
   get: (key: string) => Promise<Item>;
   update: (key: string, item: Item) => Promise<Item>;
   remove: (key: string) => Promise<void>;

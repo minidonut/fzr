@@ -42,7 +42,7 @@ const JsonDatabase = async (): Promise<Database> => {
     const records: string[] = [];
     for (const [key, item] of items) {
       const title = item.title.padEnd(recordLength.title, ' ').slice(0, recordLength.title);
-      const body = item.title.padEnd(recordLength.body, ' ').slice(0, recordLength.body);
+      const body = item.body.padEnd(recordLength.body, ' ').slice(0, recordLength.body);
 
       records.push(`${title} ${body} ${key}`);
     }
