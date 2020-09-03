@@ -83,3 +83,17 @@ We need to intialize app before start
 run ${chalk.greenBright('fzr init')}`);
   }
 }
+
+export class IndexNotFoundError extends BaseError {
+  filepath: string;
+  constructor(filepath: string) {
+    super();
+    this.filepath = filepath;
+  }
+
+  get message(): string {
+    return box(`😔 failed to load index file
+
+'${chalk.blueBright(this.filepath)}'`);
+  }
+}

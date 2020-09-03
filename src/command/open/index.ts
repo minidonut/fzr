@@ -1,7 +1,9 @@
 import { config } from '../../context/config';
+import { find } from '../../utils/find';
 
 async function command(): Promise<void> {
-  console.log('open!', config);
+  const selected = await find();
+  console.log('open!', selected);
 }
 
 export default command;
