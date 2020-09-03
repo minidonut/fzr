@@ -21,7 +21,7 @@ export const getDatabase = async (): Promise<Database | null> => {
 // TODO move to constnat
 const recordLength = {
   title: 30,
-  body: 80,
+  body: 100,
   key: 8,
 };
 
