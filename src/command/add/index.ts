@@ -1,5 +1,6 @@
 import { getDatabase } from '../../database';
 import * as prompts from 'prompts';
+import * as chalk from 'chalk';
 
 const onCancel = (): void => process.exit(0);
 
@@ -48,6 +49,8 @@ async function command(): Promise<void> {
     resource,
     title,
   });
+
+  console.log(`${chalk.blueBright('add')} record '${title}' 👍`);
 }
 
 export default command;
