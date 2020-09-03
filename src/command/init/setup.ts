@@ -25,9 +25,14 @@ export async function setup({ database }: SetupProps): Promise<void> {
 async function setupDatabase(database: DatabaseType): Promise<void> {
   const { basePath, profile } = env;
   const profilePath = path.join(basePath, profile);
+
+  // handle database case
   if (database === 'json') {
     fs.writeFileSync(path.join(profilePath, 'database.json'), '{}');
   }
+
+  // generate index
+  fs.writeFileSync(path.join(profilePath, 'index'), '');
 
   const configPath = path.join(basePath, 'config.json');
   const config = { [profile]: { database } };
