@@ -18,4 +18,5 @@ export interface Database {
   update: (key: string, item: Item) => Promise<Item>;
   remove: (key: string) => Promise<Item>;
   length: () => Promise<number>;
+  refresh: () => Promise<void>;
 }

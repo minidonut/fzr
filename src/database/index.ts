@@ -5,6 +5,7 @@ import { Database, Item } from '../model';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as crypto from 'crypto';
+import * as chalk from 'chalk';
 
 export const getDatabase = async (): Promise<Database> => {
   const databaseType = config[env.profile]?.database;
@@ -89,11 +90,19 @@ const JsonDatabase = async (): Promise<Database> => {
     return Object.keys(json).length;
   }
 
+  async function refresh(): Promise<void> {
+    const count = await length();
+    console.log(`index refreshed with '${chalk.greenBright(count)}' items`);
+    await generate();
+    return;
+  }
+
   return {
     add,
     get,
     update,
     remove,
+    refresh,
     length,
   };
 };

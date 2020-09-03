@@ -56,7 +56,7 @@ const fzr = async (): Promise<void> => {
       require('./command/remove').default();
       break;
     case 'refresh':
-      throw new NotImplementedCommandError(cmd);
+      require('./command/refresh').default();
       break;
     default:
       if (cmd != null) {
