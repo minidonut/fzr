@@ -16,6 +16,6 @@ export interface Database {
   add: (item: Item) => Promise<Item>;
   get: (key: string) => Promise<Item>;
   update: (key: string, item: Item) => Promise<Item>;
-  remove: (key: string) => Promise<void>;
+  remove: (key: string) => Promise<Item>;
   length: () => Promise<number>;
 }

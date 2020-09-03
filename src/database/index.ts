@@ -78,10 +78,11 @@ const JsonDatabase = async (): Promise<Database> => {
     return item;
   }
 
-  async function remove(key: string): Promise<void> {
+  async function remove(key: string): Promise<Item> {
+    const item = json[key];
     delete json[key];
     await Promise.all([save(), generate()]);
-    return;
+    return item;
   }
 
   async function length(): Promise<number> {

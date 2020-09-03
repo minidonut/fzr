@@ -53,7 +53,7 @@ const fzr = async (): Promise<void> => {
       require('./command/add').default();
       break;
     case 'rm':
-      throw new NotImplementedCommandError(cmd);
+      require('./command/remove').default();
       break;
     case 'update':
       throw new NotImplementedCommandError(cmd);
