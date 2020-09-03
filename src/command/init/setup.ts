@@ -42,7 +42,7 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
   }
 
   const configPath = path.join(basePath, 'config.json');
-  const config = { [profile]: { database } };
+  const config = { [profile]: { database, data: {} } };
   const oldConfig = fs.existsSync(configPath)
     ? JSON.parse(fs.readFileSync(configPath, 'utf-8'))
     : {};
