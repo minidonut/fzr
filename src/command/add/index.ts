@@ -1,16 +1,10 @@
-import { env } from '../../context/env';
 import { getDatabase } from '../../database';
-import { ProfileNotFoundError } from '../../error';
 import * as prompts from 'prompts';
 
 const onCancel = (): void => process.exit(0);
 
 async function command(): Promise<void> {
   const database = await getDatabase();
-  if (!database) {
-    throw new ProfileNotFoundError(env.profile);
-  }
-
   const { title } = await prompts(
     {
       name: 'title',

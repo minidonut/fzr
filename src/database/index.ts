@@ -6,7 +6,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as crypto from 'crypto';
 
-export const getDatabase = async (): Promise<Database | null> => {
+export const getDatabase = async (): Promise<Database> => {
   const databaseType = config[env.profile]?.database;
   if (!databaseType) {
     throw new ProfileNotFoundError(env.profile);
@@ -14,7 +14,8 @@ export const getDatabase = async (): Promise<Database | null> => {
   if (databaseType === 'json') {
     return JsonDatabase();
   } else {
-    return null;
+    // TODO more specified error
+    throw new ProfileNotFoundError(env.profile);
   }
 };
 
