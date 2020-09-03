@@ -14,7 +14,7 @@ async function command(): Promise<void> {
     const urls = item.resource.split(',');
     for (const url of urls) {
       await open(url.trim());
-      console.log(`open ${chalk.blueBright(url)}`);
+      console.log(`open ${chalk.blueBright(url.trim())}`);
     }
   } else {
     // resource is snippet
