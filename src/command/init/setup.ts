@@ -13,12 +13,22 @@ export async function setup({ database }: SetupProps): Promise<void> {
     await setupBasepath();
     await setupProfile();
     await setupDatabase(database);
+    await setupIndex();
   } catch (e) {
     // handle all errors inside function
     // to remove failure garbages
     console.error(e.message);
   }
 
+  return;
+}
+
+async function setupIndex(): Promise<void> {
+  const { profilePath } = env;
+
+  // TODO - make 'index', 'config.json' constant
+  // generate index
+  fs.ensureFileSync(path.join(profilePath, 'index'));
   return;
 }
 
@@ -30,10 +40,6 @@ async function setupDatabase(database: DatabaseType): Promise<void> {
   if (database === 'json') {
     fs.writeFileSync(path.join(profilePath, 'database.json'), '{}');
   }
-
-  // TODO - make 'index', 'config.json' constant
-  // generate index
-  fs.writeFileSync(path.join(profilePath, 'index'), '');
 
   const configPath = path.join(basePath, 'config.json');
   const config = { [profile]: { database } };
