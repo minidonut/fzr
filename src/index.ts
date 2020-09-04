@@ -55,6 +55,9 @@ const fzr = async (): Promise<void> => {
     case 'rm':
       require('./command/remove').default();
       break;
+    case 'update':
+      require('./command/update').default();
+      break;
     case 'refresh':
       require('./command/refresh').default();
       break;

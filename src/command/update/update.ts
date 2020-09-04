@@ -1,20 +1,23 @@
 import { getDatabase } from '../../database';
-import { env } from '../../context/env';
 import * as prompts from 'prompts';
-import * as chalk from 'chalk';
-import * as execa from 'execa';
-import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as fs from 'fs-extra';
+import { env } from '../../context/env';
+import * as execa from 'execa';
+import * as chalk from 'chalk';
 
 const onCancel = (): void => process.exit(0);
 
-async function command(): Promise<void> {
+async function command(key: string): Promise<void> {
   const database = await getDatabase();
+  const item = await database.get(key);
+
   const { title } = await prompts(
     {
       name: 'title',
       type: 'text',
       message: 'name',
+      initial: item.title,
     },
     { onCancel }
   );
@@ -28,6 +31,7 @@ async function command(): Promise<void> {
       name: 'body',
       type: 'text',
       message: 'description',
+      initial: item.body,
     },
     { onCancel }
   );
@@ -36,7 +40,7 @@ async function command(): Promise<void> {
   await fs.outputFile(
     tmpPath,
     `url or snippet:
-`
+${item.resource}`
   );
   await execa('vim', [tmpPath], { stdio: 'inherit' });
   const resource = fs.readFileSync(tmpPath, 'utf-8').replace('url or snippet:', '').trim();
@@ -46,16 +50,16 @@ async function command(): Promise<void> {
     process.exit(0);
   }
 
-  await database.add({
-    accessedAt: -1,
-    accessedCount: 0,
-    createdAt: Number(new Date()),
+  await database.update(key, {
+    accessedAt: Number(new Date()),
+    accessedCount: item.accessedCount++,
+    createdAt: item.createdAt,
     body,
     resource,
     title,
   });
 
-  console.log(`${chalk.blueBright('add')} record '${title}' 👍`);
+  console.log(`${chalk.blueBright('update')} record '${title}' 👍`);
 }
 
 export default command;
