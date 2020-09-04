@@ -1,6 +1,10 @@
 import { getDatabase } from '../../database';
+import { env } from '../../context/env';
 import * as prompts from 'prompts';
 import * as chalk from 'chalk';
+import * as execa from 'execa';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
 const onCancel = (): void => process.exit(0);
 
@@ -28,17 +32,18 @@ async function command(): Promise<void> {
     { onCancel }
   );
 
-  const { resource } = await prompts(
-    {
-      name: 'resource',
-      type: 'text',
-      message: 'url or text',
-    },
-    { onCancel }
+  const tmpPath = path.join(env.basePath, '.tmp');
+  await fs.outputFile(
+    tmpPath,
+    `# url or snippet
+`
   );
+  await execa('vim', [tmpPath], { stdio: 'inherit' });
+  const resource = fs.readFileSync(tmpPath, 'utf-8').replace('# url or snippet', '').trim();
+
   if (!resource) {
     // TODO custom error
-    throw new Error("resource can't be empty");
+    process.exit(0);
   }
 
   database.add({
