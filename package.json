@@ -4,7 +4,7 @@
   "description": "Resource, Bookmark, Snippet manager cli using fuzzy search",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "minidonut/[{project-name}}",
+  "repository": "minidonut/fzr",
   "scripts": {
     "build": "tsc",
     "postbuild": "scripts/postbuild.sh",

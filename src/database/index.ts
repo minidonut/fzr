@@ -36,7 +36,7 @@ const JsonDatabase = async (): Promise<Database> => {
   const json: Record<string, Item> = await fs.readJson(jsonPath);
 
   async function save(): Promise<void> {
-    await fs.writeJson(jsonPath, json);
+    await fs.writeJson(jsonPath, json, { spaces: 2 });
   }
 
   async function generate(): Promise<void> {
